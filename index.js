@@ -1,3 +1,9 @@
+// Polyfill: Baileys expects the Web Crypto API as a global, which some
+// Node 18 runtimes don't expose by default (causes "crypto is not defined").
+if (!globalThis.crypto) {
+  globalThis.crypto = require('crypto').webcrypto;
+}
+
 const {
   default: makeWASocket,
   useMultiFileAuthState,
